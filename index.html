@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>테라리움 총정리 자료집</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ink:#15233a; --muted:#5d6878; --line:#d8dde4; --soft:#f5f7f2;
+  --olive:#4c6a28; --olive-soft:#eaf0e0; --navy:#1b2e52;
+  --red:#cf2419; --red-soft:#fdecea; --side:#e6e8e4; --paper:#ffffff;
+  --sand:#f3ece0; --brown:#7a5a3a;
+  --f:"IBM Plex Sans KR","Noto Sans CJK KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--side);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.3;text-wrap:balance}
+p{margin:0 0 10px}
+ul,ol{margin:6px 0 10px;padding-left:20px}
+li{margin:3px 0}
+.num{font-variant-numeric:tabular-nums}
+
+/* 상단 바: 브랜드 + 자료집명만 */
+.topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.topbar .in{max-width:880px;margin:0 auto;padding:12px 16px;display:flex;align-items:baseline;gap:12px}
+.brand{font-weight:700;letter-spacing:.18em;font-size:15px;color:var(--olive)}
+.topbar .ttl{font-weight:600;font-size:15px;color:var(--ink)}
+.topbar nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.topbar nav a{font-size:12.5px;color:var(--muted);text-decoration:none;padding:3px 8px;border-radius:999px}
+.topbar nav a:hover{background:var(--olive-soft);color:var(--olive)}
+
+/* 가운데 흰 열 */
+.page{max-width:880px;margin:0 auto;background:var(--paper);min-height:100vh;box-shadow:0 0 0 1px var(--line)}
+.inner{padding:36px 48px 56px}
+@media (max-width:640px){.inner{padding:24px 16px 40px}.topbar nav{display:none}}
+
+.cover{padding-bottom:24px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.cover .kicker{font-size:13px;color:var(--olive);font-weight:600;letter-spacing:.06em}
+.cover h1{font-size:32px;margin:6px 0 10px}
+.cover p{color:var(--muted);max-width:640px}
+
+.flow{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 36px}
+.flow h4{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:10px}
+.flow ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow li{margin:0;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500}
+.flow li a{color:var(--ink);text-decoration:none;background:#fff;border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+.flow li a:hover{border-color:var(--olive);color:var(--olive)}
+.flow li:not(:last-child)::after{content:"›";color:var(--muted)}
+
+section.ch{padding-top:8px;margin-bottom:44px;scroll-margin-top:64px}
+.ch-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:18px}
+.ch-head .no{font-size:14px;font-weight:700;color:var(--olive)}
+.ch-head h2{font-size:22px}
+h3{font-size:17px;margin:22px 0 10px}
+.lead{color:var(--muted);margin-bottom:16px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fff}
+.card h4{font-size:15px;margin-bottom:6px}
+.card.olive{background:var(--olive-soft);border-color:#cfdcbc}
+.card.sand{background:var(--sand);border-color:#e5d8c2}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--olive);color:#fff;margin-right:4px;vertical-align:1px}
+.tag.sand{background:var(--brown)}
+.tag.line{background:#fff;color:var(--muted);border:1px solid var(--line)}
+
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 14px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:600;font-size:13px;color:var(--navy)}
+td.k{font-weight:600;white-space:nowrap}
+
+.note{border-left:4px solid var(--olive);background:var(--olive-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.warn{border-left:4px solid var(--red);background:var(--red-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.warn b{color:var(--red)}
+
+/* 단계 + 그림 */
+.figure{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fff;margin:12px 0 18px}
+.figure svg{display:block;width:100%;height:auto}
+.figcap{font-size:12.5px;color:var(--muted);margin-top:6px;text-align:center}
+.steps{list-style:none;padding:0;margin:0}
+.step{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.step:last-child{border-bottom:0}
+.pin{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.step h4{font-size:15.5px;margin-bottom:4px}
+.step p{margin:0;font-size:14.5px}
+.step .why{font-size:13px;color:var(--muted);margin-top:4px}
+.step.on{background:var(--red-soft);border-radius:8px}
+.lay{transition:opacity .2s}
+svg.focus .lay{opacity:.25}
+svg.focus .lay.hl{opacity:1}
+
+.check{list-style:none;padding:0}
+.check li{display:flex;gap:8px;align-items:flex-start}
+.check input{margin-top:6px;accent-color:var(--olive)}
+
+.recipe{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.recipe .rh{background:var(--soft);padding:10px 16px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.recipe .rh h4{font-size:16px}
+.recipe .rh span{font-size:12.5px;color:var(--muted)}
+.recipe .rb{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:14px}
+@media (max-width:640px){.recipe .rb{grid-template-columns:1fr}}
+.recipe .rb b{display:block;font-size:12.5px;color:var(--olive);margin-bottom:2px}
+
+.sources{font-size:12.5px;color:var(--muted)}
+.sources li{margin:2px 0;word-break:break-all}
+.sources a{color:var(--navy)}
+footer{font-size:12px;color:var(--muted);text-align:center;padding:20px 0 0;border-top:1px solid var(--line)}
+
+/* 인쇄(PDF) */
+@page{size:A4;margin:14mm 13mm 16mm}
+@media print{
+  body{background:#fff;font-size:10.5pt;line-height:1.6}
+  .topbar{position:static;border-bottom:1.5px solid var(--ink)}
+  .topbar nav{display:none}
+  .topbar .in{padding:0 0 8px;max-width:none}
+  .page{box-shadow:none;max-width:none}
+  .inner{padding:16px 0 0}
+  .flow li a{border:1px solid var(--line)}
+  section.ch{break-before:page;margin-bottom:0}
+  section.ch.first{break-before:auto}
+  .card,.recipe,.figure,table,.note,.warn,.step{break-inside:avoid}
+  h3{break-after:avoid}
+  .step{cursor:default}
+  .step.on{background:none}
+  svg.focus .lay{opacity:1}
+  a{color:inherit;text-decoration:none}
+  .sources a{text-decoration:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar"><div class="in">
+  <span class="brand">TERRARIUM</span><span class="ttl">총정리 자료집</span>
+  <nav>
+    <a href="#c1">종류</a><a href="#c2">소재</a><a href="#c3">식물</a><a href="#c4">제작</a><a href="#c5">관리</a><a href="#c6">문제해결</a><a href="#c7">예시</a>
+  </nav>
+</div></header>
+
+<main class="page"><div class="inner">
+
+<div class="cover">
+  <div class="kicker">소재부터 제작·관리까지</div>
+  <h1>테라리움 총정리 자료집</h1>
+  <p>유리 용기 안에 흙·식물·물이 스스로 순환하는 작은 정원을 만드는 방법을 한 권에 모았습니다. 국내외 제작 강의와 원예 기관 자료를 비교해 공통으로 권하는 방법을 기준으로 정리했고, 출처마다 의견이 갈리는 부분은 따로 표시했습니다.</p>
+</div>
+
+<div class="flow">
+  <h4>전체 흐름</h4>
+  <ol>
+    <li><a href="#c1">밀폐형·개방형 고르기</a></li>
+    <li><a href="#c2">용기·소재 준비</a></li>
+    <li><a href="#c3">식물 고르기</a></li>
+    <li><a href="#c4">층 쌓고 심기</a></li>
+    <li><a href="#c5">자리 잡기·물 관리</a></li>
+    <li><a href="#c6">문제 해결</a></li>
+  </ol>
+</div>
+
+<!-- 1 -->
+<section class="ch first" id="c1">
+  <div class="ch-head"><span class="no">01</span><h2>테라리움의 종류</h2></div>
+  <p class="lead">가장 먼저 정할 것은 뚜껑을 닫을지 말지입니다. 이 선택에 따라 식물, 흙, 물 주는 방법이 모두 달라집니다.</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 720 268" role="img" aria-label="밀폐형과 개방형 테라리움 비교 그림">
+      <!-- 밀폐형 -->
+      <g transform="translate(70,20)">
+        <rect x="70" y="0" width="80" height="22" rx="4" fill="#b9a382"/>
+        <path d="M60 22 h100 v10 q40 10 40 50 v110 q0 18 -18 18 h-144 q-18 0 -18 -18 v-110 q0 -40 40 -50z" fill="#eef5f7" stroke="#8aa0a8" stroke-width="2"/>
+        <rect x="26" y="168" width="168" height="30" fill="#c99b6d" opacity=".55"/>
+        <rect x="26" y="158" width="168" height="10" fill="#333"/>
+        <rect x="26" y="130" width="168" height="28" fill="#5a3e28"/>
+        <path d="M26 130 q40 -12 84 -4 q40 6 84 -2 v6 h-168z" fill="#5f8a33"/>
+        <path d="M80 126 q-6 -40 -26 -52 M80 126 q4 -46 22 -58 M80 126 q14 -30 34 -36" stroke="#3f6b2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="150" cy="112" rx="18" ry="12" fill="#c2486a"/><ellipse cx="150" cy="112" rx="10" ry="6" fill="#5f8a33"/>
+        <g fill="#7fb2c7" opacity=".8"><circle cx="40" cy="60" r="2.5"/><circle cx="48" cy="80" r="2"/><circle cx="182" cy="66" r="2.5"/><circle cx="176" cy="88" r="2"/><circle cx="110" cy="44" r="2"/></g>
+        <text x="110" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#15233a">밀폐형 (Closed)</text>
+      </g>
+      <!-- 개방형 -->
+      <g transform="translate(410,20)">
+        <path d="M40 40 q-30 40 -30 90 q0 70 100 70 q100 0 100 -70 q0 -50 -30 -90" fill="#fbf7ef" stroke="#8aa0a8" stroke-width="2"/>
+        <ellipse cx="110" cy="40" rx="70" ry="10" fill="none" stroke="#8aa0a8" stroke-width="2"/>
+        <path d="M18 150 q92 30 184 0 v10 q-10 36 -92 40 q-82 -4 -92 -40z" fill="#d9c39a"/>
+        <path d="M18 140 q92 22 184 0 v12 q-92 26 -184 0z" fill="#e8d7b4"/>
+        <g transform="translate(80,118)"><path d="M0 0 q-14 -10 -18 -24 q14 2 18 14 q4 -18 0 -30 q12 10 8 30 q8 -14 20 -18 q-2 16 -16 28z" fill="#7aa66a"/></g>
+        <rect x="132" y="88" width="16" height="40" rx="8" fill="#5f8f4a"/><rect x="120" y="100" width="10" height="20" rx="5" fill="#5f8f4a"/>
+        <circle cx="60" cy="132" r="6" fill="#bfb4a6"/><circle cx="160" cy="134" r="7" fill="#a89c8c"/>
+        <path d="M110 6 v20 M96 10 l6 14 M124 10 l-6 14" stroke="#c99b6d" stroke-width="2" stroke-linecap="round"/>
+        <text x="110" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#15233a">개방형 (Open)</text>
+      </g>
+    </svg>
+    <div class="figcap">밀폐형은 내부에서 수분이 맺히고 떨어지며 순환하고, 개방형은 공기가 통해 건조하게 유지됩니다.</div>
+  </div>
+
+  <table>
+    <tr><th style="width:18%">구분</th><th>밀폐형 (Closed)</th><th>개방형 (Open)</th></tr>
+    <tr><td class="k">환경</td><td>습도가 높고 공기 흐름이 거의 없음. 물이 증발→결로→흙으로 돌아가며 순환</td><td>공기가 자유롭게 통해 건조함. 일반 화분에 가까운 환경</td></tr>
+    <tr><td class="k">어울리는 식물</td><td>고사리류, 이끼, 피토니아처럼 습한 숲 바닥 식물</td><td>다육식물, 선인장, 틸란드시아(에어플랜트)</td></tr>
+    <tr><td class="k">물 주기</td><td>매우 드묾 — 잘 자리 잡으면 1년에 몇 번 정도</td><td>흙이 마르면 조금씩 — 밀폐형보다 자주</td></tr>
+    <tr><td class="k">빛</td><td>밝은 간접광. 직사광선은 내부를 과열시킴</td><td>밝은 빛 선호. 강한 햇빛에 비교적 강함</td></tr>
+    <tr><td class="k">주의</td><td>다육·선인장은 습기로 무름</td><td>습한 환경 식물과 섞어 심지 않기</td></tr>
+  </table>
+  <div class="note">처음이라면 <b>밀폐형 이끼 병</b>이나 <b>개방형 다육 볼</b> 중 하나로 시작하세요. 두 유형의 식물을 한 용기에 섞는 것이 가장 흔한 실패 원인입니다.</div>
+</section>
+
+<!-- 2 -->
+<section class="ch" id="c2">
+  <div class="ch-head"><span class="no">02</span><h2>용기와 소재</h2></div>
+
+  <h3>용기 고르기</h3>
+  <div class="grid2">
+    <div class="card"><h4>투명한 유리가 기본</h4><p>안을 들여다보는 것이 테라리움의 목적이므로 투명 유리나 아크릴을 씁니다. 밀폐형은 꼭 맞는 뚜껑(유리·코르크)이 필요하고, 개방형은 입구가 넓은 볼이나 어항형이 좋습니다.</p></div>
+    <div class="card"><h4>크기와 입구</h4><p>식물이 자랄 여유가 있는지 먼저 봅니다. 입구가 좁고 키가 큰 병은 핀셋·젓가락 같은 긴 도구가 있어야 작업할 수 있습니다.</p></div>
+    <div class="card"><h4>세척</h4><p>곰팡이를 막는 첫 단계는 위생입니다. 사용 전 뜨거운 비눗물로 씻고 완전히 말립니다.</p></div>
+    <div class="card"><h4>재활용 용기</h4><p>잼병, 쓰지 않는 어항, 유리 화병도 충분히 쓸 수 있습니다. 바닥에 구멍이 없다는 점은 같으니 배수층을 신경 씁니다.</p></div>
+  </div>
+
+  <h3>층별 소재</h3>
+  <table>
+    <tr><th style="width:17%">층</th><th style="width:28%">대표 소재</th><th>역할과 팁</th></tr>
+    <tr><td class="k">① 배수층</td><td>하이드로볼(난석), 자갈, 강자갈</td><td>바닥에 구멍이 없는 용기에서 남는 물이 고이는 저수 공간. 뿌리가 물에 잠겨 썩는 것을 막습니다. 하이드로볼은 점토를 고온에 구워 만든 다공질 인공토라 가볍고 통기·보습이 좋습니다.</td></tr>
+    <tr><td class="k">② 차단층</td><td>부직포·메쉬, 수태(물이끼)</td><td>위쪽 흙이 배수층으로 쓸려 내려가 막히는 것을 막는 칸막이.</td></tr>
+    <tr><td class="k">③ 숯층</td><td>활성탄, 원예용 숯</td><td>물을 거르고 냄새·잡균을 줄이는 보조 역할. 얇게 뿌립니다. <span class="tag line">선택</span></td></tr>
+    <tr><td class="k">④ 흙층</td><td>밀폐형: 열대식물용 배합토(상토+펄라이트 등)<br>개방형: 선인장·다육용 흙</td><td>식물 뿌리가 자리 잡는 층. 보통 4~6cm, 식물 뿌리를 덮을 만큼. 뒤쪽을 높이면 언덕 같은 깊이감이 생깁니다.</td></tr>
+    <tr><td class="k">⑤ 표면</td><td>이끼, 장식 모래·자갈</td><td>흙 표면을 덮어 마르는 것을 늦추고 완성도를 높입니다.</td></tr>
+    <tr><td class="k">⑥ 장식</td><td>돌, 유목, 피규어</td><td>구조와 이야기를 만드는 요소. 야생에서 주운 나무는 습한 환경에서 곰팡이가 피기 쉬우니 처리된 것을 쓰거나 깨끗이 씻습니다.</td></tr>
+  </table>
+
+  <div class="warn"><b>출처마다 갈리는 부분</b> — 배수층과 숯은 "반드시"가 아닙니다. 흙 깊이가 약 7~8cm 미만인 작은 병은 배수층을 생략하고 그 공간을 흙에 쓰는 편이 낫다는 의견이 있고, 숯의 정화 효과도 수치로 확인하기 어렵다는 지적이 있습니다. 숯이 물을 너무 많이 준 테라리움을 살려 주지는 못하니, 결국 핵심은 <b>물을 적게 주는 것</b>입니다.</div>
+
+  <h3>도구</h3>
+  <div class="grid2">
+    <div class="card"><h4>필수</h4><ul><li>긴 핀셋 (식재·이끼 배치)</li><li>분무기</li><li>작은 삽 또는 깔때기 (흙 넣기)</li><li>마른 천 (유리 안쪽 닦기)</li></ul></div>
+    <div class="card"><h4>있으면 편함</h4><ul><li>나무젓가락·막대 (구멍 내기, 흙 다지기)</li><li>작은 가위 (다듬기)</li><li>붓 (유리·잎의 흙 털기)</li><li>스포이트 (물 소량 주기·빼기)</li></ul></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="ch" id="c3">
+  <div class="ch-head"><span class="no">03</span><h2>식물 고르기</h2></div>
+  <p class="lead">공통 조건은 <b>작고, 천천히 자라고, 같은 환경을 좋아하는 식물끼리</b> 고르는 것입니다. 키·색·질감이 다른 식물을 섞고, 홀수로 배치하면 자연스러워 보입니다.</p>
+
+  <h3><span class="tag">밀폐형</span> 습기를 좋아하는 식물</h3>
+  <table>
+    <tr><th style="width:28%">식물</th><th>특징</th></tr>
+    <tr><td class="k">피토니아</td><td>잎맥 무늬가 선명한 대표 밀폐형 식물. 작고 습도를 좋아함</td></tr>
+    <tr><td class="k">셀라기넬라 (부처손류)</td><td>이끼처럼 가지가 갈라지는 질감. 습한 곳에서 잘 자람</td></tr>
+    <tr><td class="k">소형 고사리</td><td>단추고사리, 아디안텀(공작고사리) 등. 세로로 뻗어 높이감을 줌</td></tr>
+    <tr><td class="k">페페로미아</td><td>도톰한 잎, 느린 성장</td></tr>
+    <tr><td class="k">아스파라거스 고사리</td><td>깃털 같은 잎으로 넓은 잎 식물과 대비</td></tr>
+    <tr><td class="k">이끼류</td><td>비단이끼(카펫형), 서리이끼, 쿠션이끼 등. 바닥을 덮는 초록 카펫</td></tr>
+  </table>
+  <div class="note">밀폐형에는 <b>꽃이 피는 식물을 피하는 것</b>이 좋습니다. 시든 꽃을 정리하려고 자주 열면 내부 균형이 흔들립니다.</div>
+
+  <h3><span class="tag sand">개방형</span> 건조를 좋아하는 식물</h3>
+  <table>
+    <tr><th style="width:28%">식물</th><th>특징</th></tr>
+    <tr><td class="k">에케베리아</td><td>장미 모양 로제트, 색이 다양</td></tr>
+    <tr><td class="k">하월시아</td><td>줄무늬 잎, 비교적 약한 빛에도 견딤</td></tr>
+    <tr><td class="k">소형 선인장</td><td>밝은 빛 필요, 물은 아주 적게</td></tr>
+    <tr><td class="k">틸란드시아 (에어플랜트)</td><td>흙 없이 올려 두는 식물. 공기가 통해야 함</td></tr>
+    <tr><td class="k">늘어지는 다육</td><td>녹영(구슬 모양), 하트 모양 덩굴 등 — 입구 밖으로 늘어뜨려 연출</td></tr>
+  </table>
+
+  <h3>이끼 구하기</h3>
+  <ul>
+    <li>원예점·온라인 이끼 전문점, 수족관 용품점에서 재배 이끼를 구입합니다.</li>
+    <li><b>산이나 들의 이끼를 함부로 채취하지 않습니다.</b> 남의 땅이라면 반드시 허락을 받으세요.</li>
+    <li>국내 연구(쥐꼬리이끼·날개양털이끼 분쇄번식 실험)에서는 23℃ 전후에서 생육이 가장 좋았고, 버미큘라이트만 쓴 흙에서는 생육이 부진했습니다.</li>
+  </ul>
+</section>
+
+<!-- 4 -->
+<section class="ch" id="c4">
+  <div class="ch-head"><span class="no">04</span><h2>제작 순서</h2></div>
+  <p class="lead">아래 그림의 번호는 쌓는 순서입니다. 단계를 누르면 해당 층이 강조됩니다. (밀폐형 기준, 개방형은 흙과 식물만 바꾸면 됩니다.)</p>
+
+  <div class="figure">
+    <svg id="layerSvg" viewBox="0 0 720 360" role="img" aria-label="테라리움 층 단면도">
+      <defs>
+        <pattern id="balls" width="18" height="16" patternUnits="userSpaceOnUse"><rect width="18" height="16" fill="#d8b48a"/><circle cx="5" cy="5" r="4.5" fill="#b27a48"/><circle cx="14" cy="11" r="4.5" fill="#a46c3c"/></pattern>
+        <pattern id="char" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#2b2b2b"/><rect x="1" y="2" width="3" height="2" fill="#555"/><rect x="5" y="5" width="2" height="2" fill="#444"/></pattern>
+        <pattern id="soil" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#5a3e28"/><circle cx="3" cy="3" r="1" fill="#e8e2d6"/><circle cx="8" cy="7" r=".8" fill="#7a5a3a"/></pattern>
+      </defs>
+      <!-- 병 -->
+      <path d="M180 40 h180 v14 q70 14 70 80 v190 q0 22 -22 22 h-276 q-22 0 -22 -22 v-190 q0 -66 70 -80z" fill="#f4f8f9" stroke="#8aa0a8" stroke-width="2.5"/>
+      <rect x="170" y="22" width="200" height="22" rx="5" fill="#b9a382" class="lay" data-l="8"/>
+      <g class="lay" data-l="1"><rect x="112" y="290" width="316" height="54" fill="url(#balls)"/></g>
+      <g class="lay" data-l="2"><rect x="112" y="282" width="316" height="8" fill="#e9e6df" stroke="#bdb6a8"/></g>
+      <g class="lay" data-l="3"><rect x="112" y="272" width="316" height="10" fill="url(#char)"/></g>
+      <g class="lay" data-l="4"><path d="M112 272 v-62 q120 -34 316 -6 v68z" fill="url(#soil)"/></g>
+      <g class="lay" data-l="5">
+        <path d="M178 200 q-10 -60 -40 -84 M178 200 q4 -70 30 -92 M178 200 q20 -46 52 -56" stroke="#3f6b2a" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <ellipse cx="330" cy="188" rx="30" ry="16" fill="#c2486a"/><path d="M304 188 h52 M330 174 v28" stroke="#f3d6df" stroke-width="2"/>
+        <path d="M260 200 q-2 -26 10 -40 q8 18 2 40z" fill="#4f7c34"/>
+      </g>
+      <g class="lay" data-l="6">
+        <path d="M112 214 q40 -14 90 -8 q30 4 60 0 q60 -8 166 -4 v10 q-160 -10 -316 8z" fill="#6c9a3a"/>
+        <ellipse cx="392" cy="198" rx="26" ry="14" fill="#9a9488"/><ellipse cx="386" cy="192" rx="12" ry="5" fill="#b5afa3"/>
+        <path d="M230 206 q30 -30 70 -24" stroke="#8a6a48" stroke-width="7" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="lay" data-l="7" fill="#7fb2c7"><circle cx="140" cy="100" r="3"/><circle cx="150" cy="128" r="2.5"/><circle cx="400" cy="110" r="3"/><circle cx="392" cy="140" r="2.5"/><circle cx="270" cy="70" r="2.5"/></g>
+
+      <!-- 핀 -->
+      <g font-size="13" font-weight="700" text-anchor="middle">
+        <g><line x1="428" y1="318" x2="478" y2="318" stroke="#cf2419"/><circle cx="492" cy="318" r="13" fill="#cf2419"/><text x="492" y="322.5" fill="#fff">1</text><text x="514" y="322" text-anchor="start" fill="#15233a" font-weight="600">배수층 (하이드로볼 2~3cm)</text></g>
+        <g><line x1="428" y1="286" x2="478" y2="290" stroke="#cf2419"/><circle cx="492" cy="290" r="13" fill="#cf2419"/><text x="492" y="294.5" fill="#fff">2</text><text x="514" y="294" text-anchor="start" fill="#15233a" font-weight="600">차단층 (메쉬·수태)</text></g>
+        <g><line x1="428" y1="277" x2="478" y2="262" stroke="#cf2419"/><circle cx="492" cy="262" r="13" fill="#cf2419"/><text x="492" y="266.5" fill="#fff">3</text><text x="514" y="266" text-anchor="start" fill="#15233a" font-weight="600">활성탄 얇게</text></g>
+        <g><line x1="428" y1="236" x2="478" y2="234" stroke="#cf2419"/><circle cx="492" cy="234" r="13" fill="#cf2419"/><text x="492" y="238.5" fill="#fff">4</text><text x="514" y="238" text-anchor="start" fill="#15233a" font-weight="600">흙 4~6cm, 뒤쪽 높게</text></g>
+        <g><line x1="356" y1="186" x2="478" y2="178" stroke="#cf2419"/><circle cx="492" cy="178" r="13" fill="#cf2419"/><text x="492" y="182.5" fill="#fff">5</text><text x="514" y="182" text-anchor="start" fill="#15233a" font-weight="600">큰 식물부터 심기</text></g>
+        <g><line x1="418" y1="198" x2="478" y2="206" stroke="#cf2419"/><circle cx="492" cy="206" r="13" fill="#cf2419"/><text x="492" y="210.5" fill="#fff">6</text><text x="514" y="210" text-anchor="start" fill="#15233a" font-weight="600">이끼·돌·유목</text></g>
+        <g><line x1="404" y1="110" x2="478" y2="120" stroke="#cf2419"/><circle cx="492" cy="120" r="13" fill="#cf2419"/><text x="492" y="124.5" fill="#fff">7</text><text x="514" y="124" text-anchor="start" fill="#15233a" font-weight="600">분무 후 유리 닦기</text></g>
+        <g><line x1="370" y1="33" x2="478" y2="56" stroke="#cf2419"/><circle cx="492" cy="56" r="13" fill="#cf2419"/><text x="492" y="60.5" fill="#fff">8</text><text x="514" y="60" text-anchor="start" fill="#15233a" font-weight="600">뚜껑 닫기</text></g>
+      </g>
+    </svg>
+    <div class="figcap">밀폐형 테라리움 단면 — 아래에서 위로 쌓습니다.</div>
+  </div>
+
+  <ol class="steps" id="steps">
+    <li class="step" data-l="1"><span class="pin">1</span><div><h4>배수층 깔기</h4><p>바닥에 하이드로볼이나 자갈을 2~3cm 정도 고르게 깝니다. 용기 높이의 1/4을 넘지 않게 합니다.</p><p class="why">흙 깊이가 얕은 작은 병이라면 생략하고 흙을 더 넣어도 됩니다.</p></div></li>
+    <li class="step" data-l="2"><span class="pin">2</span><div><h4>차단층 덮기</h4><p>배수층 위에 용기 모양대로 자른 메쉬를 덮거나, 물에 적셔 꼭 짠 수태를 얇게 펼칩니다.</p><p class="why">흙이 배수층으로 새어 내려가 막히는 것을 막습니다.</p></div></li>
+    <li class="step" data-l="3"><span class="pin">3</span><div><h4>활성탄 뿌리기</h4><p>얇게 한 겹만 고르게 뿌립니다. 선택 사항입니다.</p></div></li>
+    <li class="step" data-l="4"><span class="pin">4</span><div><h4>흙 넣고 지형 만들기</h4><p>배합토를 4~6cm 넣고 살짝 다집니다. 뒤쪽을 높게 경사지게 하면 앞에서 볼 때 깊이감이 생깁니다. 분무기로 흙을 촉촉하게 적셔 둡니다.</p></div></li>
+    <li class="step" data-l="5"><span class="pin">5</span><div><h4>식물 심기 — 큰 것부터</h4><p>포트에서 꺼낸 식물의 흙을 살살 털고 뿌리를 정리합니다. 젓가락으로 구멍을 내고 가장 큰 식물부터 심은 뒤 주변 흙을 눌러 고정합니다. 용기가 너무 크면 포기를 나눠 심어도 됩니다.</p><p class="why">잎이 유리에 닿으면 그 자리에 물이 맺혀 무르기 쉬우니 유리와 간격을 둡니다.</p></div></li>
+    <li class="step" data-l="6"><span class="pin">6</span><div><h4>이끼와 장식 배치</h4><p>남은 빈자리를 이끼로 채우고 핀셋으로 눌러 흙에 밀착시킵니다. 돌·유목으로 구조를 만듭니다.</p></div></li>
+    <li class="step" data-l="7"><span class="pin">7</span><div><h4>물 주고 정리</h4><p>이끼에 물이 스며 흙까지 젖을 정도로 분무합니다. 유리 안쪽에 묻은 흙은 붓과 마른 천으로 닦아냅니다.</p><p class="why">물은 처음부터 많이 주지 않습니다. 넣기는 쉬워도 빼기는 어렵습니다.</p></div></li>
+    <li class="step" data-l="8"><span class="pin">8</span><div><h4>뚜껑 닫기</h4><p>밀폐형은 뚜껑을 닫아 완성합니다. 개방형은 뚜껑 없이 밝은 곳에 둡니다.</p></div></li>
+  </ol>
+
+  <h3>개방형(다육)으로 만들 때 바뀌는 점</h3>
+  <div class="grid2">
+    <div class="card sand"><h4>흙</h4><p>선인장·다육용 흙이나 마사토 비중이 높은 배합. 물빠짐이 가장 중요합니다.</p></div>
+    <div class="card sand"><h4>표면</h4><p>이끼 대신 장식 모래·자갈로 마감. 층마다 색을 다르게 하면 줄무늬 연출이 됩니다.</p></div>
+    <div class="card sand"><h4>깊이</h4><p>얕은 용기는 다육처럼 뿌리가 젖는 것을 싫어하는 식물에 불리합니다. 배수층을 둘 깊이를 확보합니다.</p></div>
+    <div class="card sand"><h4>물</h4><p>가는 물줄기로 뿌리 근처에만, 일반 다육 화분보다 조금 적게 줍니다.</p></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="ch" id="c5">
+  <div class="ch-head"><span class="no">05</span><h2>자리 잡기와 관리</h2></div>
+
+  <h3>빛과 자리</h3>
+  <div class="grid2">
+    <div class="card olive"><h4>밝은 간접광</h4><p>창가 가까이 밝지만 햇빛이 직접 닿지 않는 자리가 가장 좋습니다. 북향·동향 창가가 무난합니다. 하루 4~6시간 정도 밝은 간접광을 받게 합니다.</p></div>
+    <div class="card"><h4>직사광선 금지 (밀폐형)</h4><p>유리 속은 열이 빠지지 않아 식물이 익어버립니다. 서향·남향 창가의 강한 오후 햇빛은 피합니다.</p></div>
+    <div class="card"><h4>온도</h4><p>18~24℃ 정도로 일정한 곳. 난방기·에어컨 바람, 냉기 드는 창은 피합니다.</p></div>
+    <div class="card"><h4>LED 식물등</h4><p>빛이 부족한 곳이면 LED 식물등을 하루 8~12시간 켜 줍니다. 유리가 따뜻해지면 등을 더 멀리 둡니다.</p></div>
+  </div>
+  <div class="note">식물이 한쪽으로 기울어 자라면 한 번에 휙 돌리기보다 <b>조금씩 천천히 돌려</b> 줍니다. 자주 옮기면 식물이 매번 빛 방향에 다시 적응해야 합니다.</div>
+
+  <h3>물 관리 — 결로로 읽기 (밀폐형)</h3>
+  <div class="figure">
+    <svg viewBox="0 0 720 214" role="img" aria-label="결로 상태 세 가지 비교">
+      <g font-size="14" text-anchor="middle">
+        <g transform="translate(40,10)">
+          <rect x="20" y="10" width="160" height="140" rx="16" fill="#f4f8f9" stroke="#8aa0a8" stroke-width="2"/>
+          <rect x="20" y="110" width="160" height="40" rx="0" fill="#5a3e28"/><path d="M20 110 q80 -10 160 0 v6 h-160z" fill="#6c9a3a"/>
+          <text x="100" y="178" font-weight="700" fill="#15233a">결로 없음</text>
+          <text x="100" y="196" fill="#5d6878" font-size="12.5">물 부족 · 빛 부족 의심</text>
+        </g>
+        <g transform="translate(260,10)">
+          <rect x="20" y="10" width="160" height="140" rx="16" fill="#f4f8f9" stroke="#4c6a28" stroke-width="3"/>
+          <rect x="20" y="110" width="160" height="40" fill="#5a3e28"/><path d="M20 110 q80 -10 160 0 v6 h-160z" fill="#6c9a3a"/>
+          <g fill="#7fb2c7"><circle cx="40" cy="30" r="2.5"/><circle cx="52" cy="44" r="2"/><circle cx="36" cy="58" r="2.5"/><circle cx="60" cy="26" r="2"/><circle cx="46" cy="72" r="2"/></g>
+          <text x="100" y="178" font-weight="700" fill="#4c6a28">아침·저녁 살짝 (1/3 이하)</text>
+          <text x="100" y="196" fill="#5d6878" font-size="12.5">정상 — 그대로 두기</text>
+        </g>
+        <g transform="translate(480,10)">
+          <rect x="20" y="10" width="160" height="140" rx="16" fill="#dfeaee" stroke="#cf2419" stroke-width="3"/>
+          <rect x="20" y="110" width="160" height="40" fill="#3e2a1a"/><path d="M20 110 q80 -10 160 0 v6 h-160z" fill="#4e7a2a"/>
+          <g fill="#6aa3bb"><circle cx="40" cy="30" r="4"/><circle cx="70" cy="40" r="4"/><circle cx="100" cy="28" r="4"/><circle cx="130" cy="42" r="4"/><circle cx="160" cy="30" r="4"/><circle cx="50" cy="66" r="4"/><circle cx="90" cy="70" r="4"/><circle cx="125" cy="64" r="4"/><circle cx="158" cy="78" r="4"/><circle cx="36" cy="92" r="4"/><circle cx="110" cy="94" r="4"/><circle cx="150" cy="100" r="4"/></g>
+          <text x="100" y="178" font-weight="700" fill="#cf2419">하루 종일 흠뻑</text>
+          <text x="100" y="196" fill="#5d6878" font-size="12.5">과습 — 닦고 환기</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <table>
+    <tr><th style="width:24%">보이는 상태</th><th>판단</th><th style="width:38%">할 일</th></tr>
+    <tr><td class="k">결로가 전혀 없음</td><td>물이 부족하거나 빛이 부족해 순환이 시작되지 않음</td><td>빛을 먼저 확인. 그래도 없으면 물을 한두 숟가락씩 나눠 추가</td></tr>
+    <tr><td class="k">아침·저녁에 살짝, 낮에 걷힘</td><td>건강한 상태</td><td>그대로 두기</td></tr>
+    <tr><td class="k">유리 1/3 이상, 종일 큰 물방울</td><td>과습</td><td>마른 천으로 닦고, 뚜껑을 몇 시간 열어 말리기. 며칠 반복</td></tr>
+    <tr><td class="k">배수층 물이 흙에 닿음</td><td>뿌리 썩음 위험</td><td>스포이트로 물 빼기, 물 높이가 내려갈 때까지 열어 두기</td></tr>
+  </table>
+  <div class="warn"><b>원칙: 모자란 쪽이 낫다.</b> 물은 넣기보다 빼기가 훨씬 어렵습니다. 밀폐형은 잘 자리 잡으면 몇 주~몇 달 손대지 않아도 되고, 물은 1년에 몇 번 정도면 충분한 경우가 많습니다.</div>
+
+  <h3>물의 종류와 비료</h3>
+  <ul>
+    <li>수돗물의 미네랄은 유리에 <b>하얀 얼룩</b>을 남깁니다. 가능하면 빗물·정수·증류수를 씁니다. 식충식물은 특히 미네랄에 민감합니다.</li>
+    <li>비료는 아주 적게. 너무 빨리 자라면 자주 다듬어야 하므로, 주면 생장기(봄~가을)에 한 달 한 번 정도, 권장량보다 묽게 줍니다.</li>
+  </ul>
+
+  <h3>관리 루틴</h3>
+  <table>
+    <tr><th style="width:18%">주기</th><th>밀폐형</th><th>개방형</th></tr>
+    <tr><td class="k">수시로</td><td>결로 상태 눈으로 확인</td><td>흙 마름 정도 확인</td></tr>
+    <tr><td class="k">매주</td><td>시든 잎·곰팡이 핀 부분 바로 제거</td><td>흙이 완전히 말랐을 때만 소량 급수</td></tr>
+    <tr><td class="k">매달</td><td>유리 바깥 닦기, 기울어 자라면 조금 돌리기</td><td>유리 안팎 먼지 닦기, 돌리기</td></tr>
+    <tr><td class="k">가끔</td><td>뚜껑을 잠시 열어 공기 바꿔 주기, 유리에 닿는 잎 다듬기</td><td>웃자란 줄기 정리</td></tr>
+  </table>
+
+  <h3>바이오액티브 — 청소 일꾼 넣기</h3>
+  <p>톡토기(스프링테일)는 몸길이 몇 mm의 작은 흰 벌레로, 곰팡이와 죽은 식물 조각을 먹고 양분을 흙으로 돌려줍니다. 여러 출처가 곰팡이를 막는 가장 좋은 자연 해법으로 꼽습니다. 큰 테라리움에는 등각류(쥐며느리류)를 함께 넣기도 합니다. 이렇게 생물이 분해를 맡는 구성을 <b>바이오액티브 테라리움</b>이라고 합니다.</p>
+</section>
+
+<!-- 6 -->
+<section class="ch" id="c6">
+  <div class="ch-head"><span class="no">06</span><h2>문제 해결</h2></div>
+  <p class="lead">대부분의 문제는 <b>물이 너무 많거나, 빛이 너무 많거나(혹은 적거나)</b> 둘 중 하나에서 시작됩니다.</p>
+  <table>
+    <tr><th style="width:22%">증상</th><th style="width:30%">주된 원인</th><th>해결</th></tr>
+    <tr><td class="k">하얀 솜털 곰팡이</td><td>과습 + 빛 부족, 환기 부족</td><td>면봉·핀셋으로 걷어내고, 뚜껑을 열어 말린 뒤 물을 줄이기. 톡토기 투입</td></tr>
+    <tr><td class="k">만든 지 2~4주 내 곰팡이</td><td>새 테라리움에 흔한 초기 현상</td><td>당황하지 말고 제거·환기. 균형이 잡히면 대개 줄어듦</td></tr>
+    <tr><td class="k">버섯이 올라옴</td><td>유기물이 많고 습함</td><td>뽑아내고 습도 낮추기</td></tr>
+    <tr><td class="k">유목에 곰팡이</td><td>야생 채취·미처리 나무, 계속 젖어 있음</td><td>꺼내 씻기, 톡토기 투입</td></tr>
+    <tr><td class="k">유리가 늘 뿌옇다</td><td>내부 물이 과다, 따뜻한 자리</td><td>닦고 환기, 조금 서늘한 곳으로</td></tr>
+    <tr><td class="k">이끼가 갈색으로 변함</td><td>물이 너무 많거나, 습도 부족</td><td>결로 상태로 어느 쪽인지 판단 후 조정</td></tr>
+    <tr><td class="k">잎이 노랗게·말라 탐 (밝은 쪽이 심함)</td><td>빛이 너무 강함</td><td>그늘진 자리로 옮기기</td></tr>
+    <tr><td class="k">이끼는 좋은데 식물이 웃자라고 흐물흐물</td><td>빛 부족</td><td>창가 가까이 또는 LED 보조</td></tr>
+    <tr><td class="k">흙·유리가 초록으로 (녹조)</td><td>빛 과다 + 습기</td><td>빛 줄이기, 물 줄이기</td></tr>
+    <tr><td class="k">줄기가 무르고 썩음</td><td>흙이 물에 잠김</td><td>썩은 부분 제거, 물 빼고 며칠 환기, 급수 중단</td></tr>
+    <tr><td class="k">잎이 바삭, 이끼가 바스락</td><td>물 부족</td><td>흙 확인 후 분무로 보충</td></tr>
+    <tr><td class="k">유리에 하얀 줄무늬</td><td>수돗물 미네랄</td><td>증류수·빗물 적신 천으로 닦기, 이후 정수 사용</td></tr>
+    <tr><td class="k">다육이 무름 (개방형)</td><td>습도 과다·밀폐</td><td>뚜껑 없이 두고 물 줄이기</td></tr>
+    <tr><td class="k">식물이 뚜껑을 밀 만큼 자람</td><td>너무 잘 자란 것</td><td>가위로 다듬기. 잘라낸 잎은 꺼내기</td></tr>
+  </table>
+  <div class="note">뿌리 썩음이 넓게 퍼졌거나 곰팡이가 계속 재발하면, 전부 꺼내고 용기를 씻어 <b>새로 만드는 것</b>이 가장 빠릅니다.</div>
+</section>
+
+<!-- 7 -->
+<section class="ch" id="c7">
+  <div class="ch-head"><span class="no">07</span><h2>예시 구성</h2></div>
+  <p class="lead">수업이나 첫 작업에 바로 쓸 수 있는 세 가지 구성입니다. 분량은 지름 12~15cm 용기 기준의 예시입니다.</p>
+
+  <div class="recipe">
+    <div class="rh"><h4>A. 밀폐형 이끼 숲 병</h4><span>난이도 쉬움 · 물 주기 아주 드묾</span></div>
+    <div class="rb">
+      <div><b>재료</b>뚜껑 있는 유리병, 하이드로볼, 메쉬 또는 수태, 활성탄 약간, 열대식물용 배합토, 비단이끼·서리이끼, 작은 돌 1~2개</div>
+      <div><b>포인트</b>식물은 이끼만으로도 충분합니다. 뒤쪽을 높여 언덕을 만들고 돌로 시선을 잡습니다. 입구가 좁으면 깔때기와 긴 핀셋을 준비합니다.</div>
+    </div>
+  </div>
+  <div class="recipe">
+    <div class="rh"><h4>B. 열대 정글 병</h4><span>난이도 보통 · 밀폐형</span></div>
+    <div class="rb">
+      <div><b>재료</b>A 구성 + 피토니아 1, 소형 고사리 1, 셀라기넬라 또는 페페로미아 1, 유목 조각</div>
+      <div><b>포인트</b>키 큰 고사리를 뒤, 색 있는 피토니아를 앞쪽 한쪽 치우치게. 세 포기(홀수) 배치. 잎이 유리에 닿지 않게 간격을 둡니다.</div>
+    </div>
+  </div>
+  <div class="recipe">
+    <div class="rh"><h4>C. 개방형 다육 사막 볼</h4><span>난이도 쉬움 · 밝은 자리</span></div>
+    <div class="rb">
+      <div><b>재료</b>입구 넓은 유리볼, 자갈, 다육·선인장용 흙, 색 모래 2~3색, 에케베리아·하월시아·소형 선인장, 장식돌</div>
+      <div><b>포인트</b>색 모래를 층층이 쌓아 줄무늬를 만들고 다육을 심은 뒤 표면을 모래로 마감. 물은 뿌리 근처에만 조금.</div>
+    </div>
+  </div>
+
+  <h3>수업 준비물 체크리스트</h3>
+  <div class="grid2">
+    <ul class="check">
+      <li><input type="checkbox"> 세척·건조한 유리 용기 (인원수 + 여분)</li>
+      <li><input type="checkbox"> 하이드로볼 / 자갈</li>
+      <li><input type="checkbox"> 메쉬(미리 재단) 또는 수태</li>
+      <li><input type="checkbox"> 활성탄</li>
+      <li><input type="checkbox"> 배합토 (유형별 구분)</li>
+      <li><input type="checkbox"> 식물·이끼 (유형별로 섞이지 않게 분류)</li>
+    </ul>
+    <ul class="check">
+      <li><input type="checkbox"> 긴 핀셋, 젓가락, 작은 삽·깔때기</li>
+      <li><input type="checkbox"> 분무기 (정수 담아 두기)</li>
+      <li><input type="checkbox"> 붓, 마른 천, 키친타월</li>
+      <li><input type="checkbox"> 장식 돌·유목·피규어</li>
+      <li><input type="checkbox"> 작업 매트·쟁반, 비닐</li>
+      <li><input type="checkbox"> 수강생용 관리 안내 카드 (05·06장 요약)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="ch" id="c8">
+  <div class="ch-head"><span class="no">08</span><h2>참고 자료</h2></div>
+  <ol class="sources">
+    <li>RHS(영국 왕립원예협회) — Bottle gardens and terrariums: <a href="https://www.rhs.org.uk/plants/types/houseplants/bottle-gardens-and-terrariums">rhs.org.uk</a></li>
+    <li>Espace pour la vie (몬트리올 식물원) — Terrarium maintenance: <a href="https://espacepourlavie.ca/en/terrarium-maintenance">espacepourlavie.ca</a></li>
+    <li>Gardeners' World — Best terrarium plants: <a href="https://gardenersworld.com/plants/best-terrarium-plants">gardenersworld.com</a></li>
+    <li>Garden Design — Terrarium plants: <a href="https://gardendesign.com/houseplants/terrariums.html">gardendesign.com</a></li>
+    <li>Terrarium Tribe — Terrarium layers / Lighting: <a href="https://terrariumtribe.com/terrarium-layers/">terrariumtribe.com</a></li>
+    <li>Green Chapter — Drainage layer for large terrariums / Substrate system / Fungus and mold: <a href="https://www.gcshop-sg.com/blogs/work-bench-ecosystem-craft/building-a-proper-drainage-layer-for-large-terrariums">gcshop-sg.com</a></li>
+    <li>Terrarium Creations — Closed terrarium guide / Troubleshooting / Placement: <a href="https://terrariumcreations.com/terrarium-troubleshooting-common-problems/">terrariumcreations.com</a></li>
+    <li>Sybotanica — Closed terrarium / Care troubleshooting: <a href="https://www.sybotanica.com/blogs/terrariums/how-to-create-a-closed-terrarium">sybotanica.com</a></li>
+    <li>Highland Moss — Terrarium common issues / Kit setup: <a href="https://highlandmoss.com/terrarium-troubleshooting/">highlandmoss.com</a></li>
+    <li>Tropical Glass — Mould guide / Placement: <a href="https://tropicalglass.co.uk/blogs/blog/tackling-mould-in-terrariums-the-comprehensive-guide">tropicalglass.co.uk</a></li>
+    <li>Weston Nurseries — Terrarium care (결로 1/3 기준, 빛 4~6시간): <a href="https://www.westonnurseries.com/?p=19321">westonnurseries.com</a></li>
+    <li>Gardenista — Troubleshooting terrariums: <a href="https://gardenista.com/posts/terrariums-go-bad-6-tips-troubleshooting-mold-yecch">gardenista.com</a></li>
+    <li>City of San Diego — How to build a terrarium (PDF): <a href="https://www.sandiego.gov/sites/default/files/how-to_build_a_terrarium.pdf">sandiego.gov</a></li>
+    <li>One Little Project — How to make a terrarium: <a href="https://onelittleproject.com/wprm_print/how-to-make-a-terrarium">onelittleproject.com</a></li>
+    <li>손기호 외(2021), 날개양털이끼와 쥐꼬리이끼 분쇄번식 시 환경 조건이 초기 생육에 미치는 영향, 화훼연구 29(2): <a href="https://scholarworks.gnu.ac.kr/handle/sw.gnu/4345">scholarworks.gnu.ac.kr</a></li>
+    <li>다이소몰 하이드로볼 제품 설명 (소재 특성): <a href="https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=41693">daisomall.co.kr</a></li>
+  </ol>
+  <p class="sources">※ 내용은 위 자료를 비교해 공통된 권장 사항을 중심으로 새로 정리한 것이며, 원문을 옮긴 것이 아닙니다. 수치(층 두께, 온도, 조명 시간 등)는 출발점이 되는 기준이니 용기 크기와 식물에 맞춰 조정하세요.</p>
+</section>
+
+<footer>테라리움 총정리 자료집 · 2026.10</footer>
+</div></main>
+
+<script>
+(function(){
+  var svg=document.getElementById('layerSvg');
+  var steps=document.querySelectorAll('#steps .step');
+  steps.forEach(function(s){
+    s.addEventListener('click',function(){
+      var on=s.classList.contains('on');
+      steps.forEach(function(x){x.classList.remove('on')});
+      svg.querySelectorAll('.lay').forEach(function(l){l.classList.remove('hl')});
+      if(on){svg.classList.remove('focus');return;}
+      s.classList.add('on');svg.classList.add('focus');
+      svg.querySelectorAll('.lay[data-l="'+s.dataset.l+'"]').forEach(function(l){l.classList.add('hl')});
+      svg.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
